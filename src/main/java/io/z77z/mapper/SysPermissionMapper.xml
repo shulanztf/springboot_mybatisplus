@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.z77z.dao.SysPermissionMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="PermissionBaseResultMap" type="io.z77z.entity.SysPermission">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="url" property="url" />
+	</resultMap>
+
+	<select id="findSysPermissions" parameterType="Map" resultMap="PermissionBaseResultMap" >
+		SELECT t3.*
+          FROM sys_role t1,
+               sys_user_role t2,
+               sys_permission t3
+         WHERE t1.id = t2.rid
+           AND t1.name = t3.name
+           AND t2.uid = #{user_id}
+	</select>
+
+</mapper>
