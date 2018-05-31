@@ -45,8 +45,8 @@
 						<div class="col-sm-8">
 							<input class="form-control" id="permissionInit" name="permissionInit"
 								placeholder="url权限" type="text" value="${permissionInit.permissionInit}"
-								data-val="true" data-val-maxlength="url权限长度不能超过20个字符"
-								data-val-maxlength-max="20" data-val-required="url权限不能为空" /> <span
+								data-val="true" data-val-maxlength="url权限长度不能超过50个字符"
+								data-val-maxlength-max="50" data-val-required="url权限不能为空" /> <span
 								data-valmsg-for="permissionInit" data-valmsg-replace="true"
 								class="field-validation-valid"></span>
 						</div>

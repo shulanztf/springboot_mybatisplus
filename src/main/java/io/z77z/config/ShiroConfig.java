@@ -20,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.alibaba.fastjson.JSON;
+
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
@@ -91,6 +94,7 @@ public class ShiroConfig {
 			filterChainDefinitionMap.put(sysPermissionInit.getUrl(),
 					sysPermissionInit.getPermissionInit());
 		}
+		System.out.println("初始化权限配置:"+JSON.toJSONString(filterChainDefinitionMap));
 
 		shiroFilterFactoryBean
 				.setFilterChainDefinitionMap(filterChainDefinitionMap);

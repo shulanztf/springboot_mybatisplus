@@ -34,6 +34,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * shiro身份校验核心类
  * 
@@ -125,8 +127,8 @@ public class MyShiroRealm extends AuthorizingRealm {
 		SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
 		String userId = user.getId();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		// 根据用户ID查询角色（role），放入到Authorization里。
 
+		// 根据用户ID查询角色（role），放入到Authorization里。
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", userId);
 		List<SysRole> roleList = sysRoleService.findSysRoles(map);
@@ -137,9 +139,9 @@ public class MyShiroRealm extends AuthorizingRealm {
 
 //		Set<String> roleSet = new HashSet<String>();
 //		roleSet.add("100002");
-//		info.setRoles(roleSet);
-		// 根据用户ID查询权限（permission），放入到Authorization里。
+		info.setRoles(roleSet);
 
+		// 根据用户ID查询权限（permission），放入到Authorization里。
 //		List<SysPermission> permissionList = sysPermissionService.selectByMap(map);
 		List<SysPermission> permissionList = sysPermissionService.findSysPermissions(map);
 		Set<String> permissionSet = new HashSet<String>();
@@ -151,6 +153,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 //		permissionSet.add("权限添加");
 //		permissionSet.add("权限删除");
 		info.setStringPermissions(permissionSet);
+		System.out.println("菜单URL权限校验:"+JSON.toJSONString(info));
 		return info;
 	}
 }
